@@ -24,13 +24,19 @@
  */
 
 #include "OSCClient.h"
+#include "OSCServer.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "lo/lo.h"
 
 int main(int argc, char *argv[])
 {
+    OSCServer oscs("7770");
+    oscs.startServer();
 
     //hostname port address types values
     std::string args[6];

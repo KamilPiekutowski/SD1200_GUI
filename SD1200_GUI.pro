@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         OSCClient.cpp \
+        OSCServer.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -38,7 +39,8 @@ INCLUDEPATH += $$PWD/../../../usr/local/include
 DEPENDPATH += $$PWD/../../../usr/local/include
 
 HEADERS += \
-    OSCClient.h
+    OSCClient.h \
+    OSCServer.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/local/lib/release/ -llo
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/local/lib/debug/ -llo
