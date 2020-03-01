@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>ArrowButton.qml</file>
+        <file>MenuButton.qml</file>
+        <file>Slider2D.qml</file>
+        <file>EffectsBrowser.qml</file>
     </qresource>
 </RCC>

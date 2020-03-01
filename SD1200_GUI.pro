@@ -50,3 +50,5 @@ else:unix: LIBS += -L$$PWD/../../../../usr/local/lib/ -llo
 
 INCLUDEPATH += $$PWD/../../../../usr/local/include
 DEPENDPATH += $$PWD/../../../../usr/local/include
+
+DISTFILES +=

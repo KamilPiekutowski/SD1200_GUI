@@ -12,7 +12,7 @@ class OSCBinder : public QObject
 public:
     explicit OSCBinder(QObject *parent = nullptr);
 
-    Q_INVOKABLE void Test();
+    Q_INVOKABLE void test();
 
 signals:
 

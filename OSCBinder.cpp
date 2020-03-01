@@ -5,7 +5,7 @@ OSCBinder::OSCBinder(QObject *parent) : QObject(parent)
 
 }
 
-void OSCBinder::Test()
+void OSCBinder::test()
 {
     qDebug() << "Hello from C++";
 }
