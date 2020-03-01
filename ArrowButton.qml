@@ -10,6 +10,7 @@ RoundButton {
         radius: 0
         color: "#A3C756"
     }
+    font.family: "Roboto"
 
     LinearGradient {
         anchors.fill: parent
@@ -27,9 +28,7 @@ RoundButton {
         text: qsTr("arrowButton")
         color: "#F6F5FC"
         anchors.centerIn: parent
-
-        font.family: "Roboto"
-
+        font.family: parent.font.family
         layer.enabled: true
         layer.samples: 16
     }

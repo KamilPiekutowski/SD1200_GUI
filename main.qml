@@ -2,9 +2,9 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.0
-import "."
 
 Window {
+    property string fontFamily: "Roboto"
     id: root
     visible: true
     width: 800
@@ -18,7 +18,9 @@ Window {
         height: parent.height * 0.25
         anchors.left: parent.left
         anchors.margins: aButtonLeft.width
+        font.family: root.fontFamily
         customText: "Effect_1"
+
         onClicked: effectsBrowser.visible = !effectsBrowser.visible
     }
 
@@ -27,6 +29,7 @@ Window {
         width: parent.height * 0.25
         height: parent.height * 0.25
         anchors.right: browserButton.left
+        font.family: root.fontFamily
     }
 
     ArrowButton {
@@ -34,6 +37,7 @@ Window {
         width: parent.height * 0.25
         height: parent.height * 0.25
         anchors.left: browserButton.right
+        font.family: root.fontFamily
     }
 
     MenuButton {
@@ -41,6 +45,7 @@ Window {
         width: parent.width - browserButton.width - aButtonLeft.width - aButtonRight.width
         height: parent.height * 0.25
         anchors.right: parent.right
+        font.family: root.fontFamily
         customText: "Settings"
     }
 
@@ -50,8 +55,10 @@ Window {
 
     EffectsBrowser {
         id: effectsBrowser
+        textColor: browserButton.textColor
     }
 
+    //this must be called when all gui element are created
     Component.onCompleted:  {
         for(var i = 0; i < 20; i++)
         {

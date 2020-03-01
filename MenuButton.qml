@@ -3,11 +3,12 @@ import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.0
 
 RoundButton {
+    property string customText;
+    property string textColor: "#F6F5FC"
+
     id: browserButton
     width: parent.width * 0.35
     height: parent.height * 0.25
-
-    property string customText;
 
     background: Rectangle {
         radius: 0
@@ -28,7 +29,7 @@ RoundButton {
     Text {
         id: browserText1
         text: qsTr(customText)
-        color: "#F6F5FC"
+        color: parent.textColor
         anchors.centerIn: parent
 
         font.pixelSize: 24
