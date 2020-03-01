@@ -27,11 +27,16 @@
 #include "OSCServer.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QDebug>
+#include <QQuickView>
+#include <QSettings>
+#include <QQmlContext>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "lo/lo.h"
+#include "OSCBinder.h"
 
 int main(int argc, char *argv[])
 {
@@ -59,14 +64,32 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    QScopedPointer<OSCBinder> oscbinder(new OSCBinder);
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
+
+
+
+
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+
+    engine.rootContext()->setContextProperty("OSCBinder", oscbinder.data());
     engine.load(url);
+
+
+
+    //QObject *rootObject = engine.rootObjects().first();
+    //QObject *item = rootObject->findChild<QObject*>("testItem");
+
+    //QObject::connect(item, SIGNAL(qmlSignal(QVariant)),
+    //                     &myClass, SLOT(cppSlot(QVariant)));
+
+
 
     return app.exec();
 }

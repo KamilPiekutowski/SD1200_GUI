@@ -11,6 +11,16 @@ Window {
     title: qsTr("SD 1200")
     color: "#0C1923"
 
+
+    Component.onCompleted:  {
+
+        for(var i = 0; i < 20; i++)
+        {
+            OSCBinder.Test()
+            myListView.model.append( { name: "Effect_" + i})
+        }
+    }
+
     RoundButton {
         id: navigation
         width: parent.width * 0.35
@@ -45,6 +55,8 @@ Window {
             layer.enabled: true
             layer.samples: 16
         }
+
+        onClicked: listViewBox.visible = !listViewBox.visible
 
         radius: 0
     }
@@ -214,20 +226,50 @@ Window {
 
     }
 
-    /*
-    ListView {
-        anchors.fill: parent;
-        model: Qt.fontFamilies()
+    Rectangle {
+        visible: false
+        id: listViewBox
+        width: parent.width
+        height: parent.height * 0.75
+        color: "#0C1923"
+        anchors.bottom: parent.bottom
+        border.width: 4;
+        border.color: "#647a35"
 
-        delegate: Item {
-            height: 40;
-            width: ListView.view.width
-            Text {
-                anchors.centerIn: parent
-                text: modelData;
-                font.family: "Roboto"
+
+        Rectangle
+        {
+            anchors.fill: parent
+            anchors.topMargin: parent.border.width +3
+            anchors.bottomMargin: parent.border.width +3
+            anchors.rightMargin: parent.border.width +3
+            anchors.leftMargin: parent.border.width +3
+
+            color: parent.color
+
+            ListView {
+                id: myListView
+                height: parent.height
+                width: parent.width
+                anchors.fill: parent
+                model: ListModel {}
+                clip: true
+
+                delegate: Text {
+                    text: name
+                    color: navText1.color
+                    font.pixelSize: navText1.font.pixelSize
+                    font.family: navText1.font.family
+                    clip:true
+                }
+
+                boundsBehavior: Flickable.StopAtBounds
+                focus: true
             }
+
         }
+
+
     }
-    */
+
 }
