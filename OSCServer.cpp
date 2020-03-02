@@ -1,9 +1,14 @@
 #include "OSCServer.h"
+#include <QString>
+
+int OSCServer::__DONE__;
+QVector<QString> OSCServer::listOfFX;
 
 OSCServer::OSCServer(std::string port)
 {
     this->port = port;
     serverThread = NULL;
+    __DONE__ = 1;
 }
 
 OSCServer::~OSCServer()
@@ -13,7 +18,6 @@ OSCServer::~OSCServer()
 
 int OSCServer::startServer()
 {
-
     /* start a new server on port 7770 */
     lo_server_thread serverThread = lo_server_thread_new(port.c_str(), error);
 
@@ -25,14 +29,29 @@ int OSCServer::startServer()
     //lo_server_thread_add_method(st, "/foo/bar", "fi", foo_handler, NULL);
 
     /* add method that will match the path /blobtest with one blob arg */
-    //lo_server_thread_add_method(st, "/blobtest", "b", blobtest_handler, NULL);
+    lo_server_thread_add_method(serverThread, "/fx_list", "s", receive_FX_list_handler, NULL);
 
     /* add method that will match the path /quit with no args */
-    //lo_server_thread_add_method(st, "/quit", "", quit_handler, NULL);
+    lo_server_thread_add_method(serverThread, "/done", "", done_handler, NULL);
 
     lo_server_thread_start(serverThread);
 
     return 0;
+}
+
+int OSCServer::get__DONE__()
+{
+    return __DONE__;
+}
+
+int OSCServer::set__DONE__(int val)
+{
+    __DONE__ = val;
+}
+
+QVector<QString>  OSCServer::getListOfFX()
+{
+    return listOfFX;
 }
 
 void OSCServer::error(int num, const char *msg, const char *path)
@@ -55,4 +74,21 @@ int OSCServer::generic_handler(const char *path, const char *types, lo_arg **arg
     fflush(stdout);
 
     return 1;
+}
+
+int OSCServer::done_handler(const char *path, const char *types, lo_arg **argv, int argc, void *data, void *user_data)
+{
+    __DONE__ = 1;
+    printf("quiting\n\n");
+    fflush(stdout);
+
+    return 0;
+}
+
+int OSCServer::receive_FX_list_handler(const char *path, const char *types, lo_arg **argv, int argc, void *data, void *user_data)
+{
+    if(argc)
+    {
+        listOfFX.push_back((char*) argv[0]);
+    }
 }

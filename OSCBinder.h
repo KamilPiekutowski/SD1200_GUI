@@ -5,15 +5,24 @@
 #include <QSettings>
 #include <QDebug>
 #include <QQuickItem>
+#include <QVector>
+
+#include "OSCClient.h"
+#include "OSCServer.h"
 
 class OSCBinder : public QObject
 {
     Q_OBJECT
-public:
+public: //methods
     explicit OSCBinder(QObject *parent = nullptr);
 
-    Q_INVOKABLE void test();
-
+    Q_INVOKABLE QVector<QString> getListOfFX();
+private: //methods
+    void requestListOfFX();
+    void waitFor__DONE__Message(); //End Of List Message "__EOL__"
+public: //members
+    OSCServer oscs;
+public: //methods
 signals:
 
 public slots:

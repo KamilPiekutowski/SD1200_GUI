@@ -60,10 +60,15 @@ Window {
 
     //this must be called when all gui element are created
     Component.onCompleted:  {
-        for(var i = 0; i < 20; i++)
-        {
-            OSCBinder.test()
-            effectsBrowser.model.append( { name: "Effect_" + i})
+
+        var elements = OSCBinder.getListOfFX()
+
+        if(elements.length) {
+            browserButton.customText = elements[0]
+        }
+
+        for(var i = 0; i < elements.length; i++) {
+            effectsBrowser.model.append( { name: elements[i]})
         }
     }
 }

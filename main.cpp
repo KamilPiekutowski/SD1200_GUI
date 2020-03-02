@@ -40,26 +40,6 @@
 
 int main(int argc, char *argv[])
 {
-    OSCServer oscs("7770");
-    oscs.startServer();
-
-    //hostname port address types values
-    std::string args[6];
-    args[0] = argv[0];
-    args[1] = "127.0.0.1";
-    args[2] =  "57120";
-    args[3] = "/main/button";
-    args[4] = "s";
-    args[5] = "hello from Qt";
-
-    OSCClient oscclient(args[1], args[2], args[3]);
-
-    oscclient.addMessageType(args[4][0]);
-    oscclient.addMessageType(args[4][0]);
-    oscclient.addMessage(args[5]);
-    oscclient.addMessage("testing multiple messages");
-    oscclient.sendMessage();
-
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
