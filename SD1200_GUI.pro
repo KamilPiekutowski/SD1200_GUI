@@ -14,9 +14,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        OSCBinder.cpp \
-        OSCClient.cpp \
-        OSCServer.cpp \
+        OSC/src/OSCBinder.cpp \
+        OSC/src/OSCClient.cpp \
+        OSC/src/OSCServer.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -37,10 +37,14 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../usr/local/lib/
 else:unix: LIBS += -L$$PWD/../../../usr/local/lib/ -llo
 
 INCLUDEPATH += $$PWD/../../../usr/local/include
+INCLUDEPATH += $$PWD/OSC/inc
+
 DEPENDPATH += $$PWD/../../../usr/local/include
 
 HEADERS += \
-    OSCBinder.h \
+    OSC/inc/OSCBinder.h \
+    OSC/inc/OSCClient.h \
+    OSC/inc/OSCServer.h \
     OSCClient.h \
     OSCServer.h
 
