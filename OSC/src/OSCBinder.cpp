@@ -14,9 +14,25 @@ QVector<QString> OSCBinder::getListOfFX()
     return  items;
 }
 
+void OSCBinder::sendQMLGuiCtrl(QString x, QString y, QChar activate)
+{
+    char a =  (char) activate.toLatin1();
+    OSCClient oscclient("127.0.0.1", "57120", "/qml_gui_ctrl");
+
+    oscclient.addMessageType('i');
+    oscclient.addMessage(x.toStdString());
+    oscclient.addMessageType('i');
+    oscclient.addMessage(y.toStdString());
+    oscclient.addMessageType(a);
+    oscclient.addMessage("");
+
+    oscclient.sendMessage();
+
+}
+
 void OSCBinder::requestListOfFX()
 {
-    /**********  sending message to sclang **********/
+    /**********         sending message to sclang            **********/
     OSCClient oscclient("127.0.0.1", "57120", "/get_fx_list");
 
     oscclient.addMessageType('s');
@@ -30,6 +46,7 @@ void OSCBinder::requestListOfFX()
 void OSCBinder::waitFor__DONE__Message()
 {
     while (!oscs.get__DONE__()) {
-        usleep(50);
+        usleep(100);
     }
 }
+

@@ -17,9 +17,11 @@ public: //methods
     explicit OSCBinder(QObject *parent = nullptr);
 
     Q_INVOKABLE QVector<QString> getListOfFX();
+    Q_INVOKABLE void sendQMLGuiCtrl(QString x, QString y, QChar activate);
 private: //methods
     void requestListOfFX();
     void waitFor__DONE__Message(); //End Of List Message "__EOL__"
+
 public: //members
     OSCServer oscs;
 public: //methods

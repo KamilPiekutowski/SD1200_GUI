@@ -18,22 +18,27 @@ Rectangle {
         drag.minimumY: 0
         drag.maximumY: height - sliderBtn.height - sliderBtn.border.width
 
-        onClicked: {
-            var posX = mouse.x
-            var posY = mouse.y
-
-            if(posX > box2.width - sliderBtn.width - sliderBtn.border.width)
-            {
-                posX = box2.width - sliderBtn.width - sliderBtn.border.width
-            }
-            if(posY > box2.height - sliderBtn.height - sliderBtn.border.width)
-            {
-                posY = box2.height - sliderBtn.height - sliderBtn.border.width
-            }
-
-            sliderBtn.x = posX
-            sliderBtn.y = posY
+        onPressed: {
+            OSCBinder.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
+                                     Math.trunc(sliderBtn.y), 'T');
         }
+
+        onMouseXChanged: {
+            OSCBinder.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
+                                     Math.trunc(sliderBtn.y), 'T');
+        }
+
+        onMouseYChanged: {
+
+            OSCBinder.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
+                                     Math.trunc(sliderBtn.y), 'T');
+        }
+
+        onReleased: {
+            OSCBinder.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
+                                     Math.trunc(sliderBtn.y), 'F');
+        }
+
     }
 
     Rectangle {
