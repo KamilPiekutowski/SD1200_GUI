@@ -57,9 +57,8 @@ HEADERS += \
 
 DISTFILES +=
 
-unix:!macx: LIBS += -L$$PWD/../../raspi/sysroot/usr/local/lib/ -llo
+linux-rasp-pi-g++: LIBS += -L$$PWD/../../raspi/sysroot/usr/local/lib/ -llo
+else:unix: LIBS += -L$$PWD/../../../../usr/local/lib/ -llo
 
 INCLUDEPATH += $$PWD/../../raspi/sysroot/usr/local/include
 DEPENDPATH += $$PWD/../../raspi/sysroot/usr/local/include
-
-CONFIG += disable-desktop
