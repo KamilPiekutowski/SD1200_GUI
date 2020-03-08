@@ -4,14 +4,15 @@ import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.0
 import "QML"
 
-Window {
+Item {
     property string fontFamily: "Roboto"
     id: root
     visible: true
     width: 800
     height: 460
-    title: qsTr("SD 1200")
-    color: "#0C1923"
+    //title: qsTr("SD 1200")
+    //color: "#0C1923"
+    //visibility: Window.FullScreen
 
     MenuButton {
         id: browserButton

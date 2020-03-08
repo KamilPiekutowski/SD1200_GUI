@@ -44,32 +44,20 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QScopedPointer<OSCBinder> oscbinder(new OSCBinder);
+    OSCBinder oscbinder;
 
+    const QString mainQmlApp = QLatin1String("qrc:/main.qml");
+    QQuickView view;
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
+    QQmlContext* context = view.engine()->rootContext();
+    context->setContextProperty("OSCBinder", QVariant::fromValue(&oscbinder));
 
+    view.setSource(QUrl(mainQmlApp));
+    view.setResizeMode(QQuickView::SizeRootObjectToView);
+    QObject::connect(view.engine(), SIGNAL(quit()), qApp, SLOT(quit()));
 
-
-
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-
-    engine.rootContext()->setContextProperty("OSCBinder", oscbinder.data());
-    engine.load(url);
-
-
-
-    //QObject *rootObject = engine.rootObjects().first();
-    //QObject *item = rootObject->findChild<QObject*>("testItem");
-
-    //QObject::connect(item, SIGNAL(qmlSignal(QVariant)),
-    //                     &myClass, SLOT(cppSlot(QVariant)));
-
-
+    view.show();
 
     return app.exec();
 }

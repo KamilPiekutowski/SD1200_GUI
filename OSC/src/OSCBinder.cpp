@@ -1,4 +1,5 @@
 #include "OSCBinder.h"
+#include <QDebug>
 
 OSCBinder::OSCBinder(QObject *parent) : QObject(parent) , oscs("7770")
 {
@@ -41,6 +42,8 @@ void OSCBinder::requestListOfFX()
 
     /**********  setup server and listen for __DONE__ message **********/
     waitFor__DONE__Message();
+
+    qDebug() << "Retrieved FX list from OSC";
 }
 
 void OSCBinder::waitFor__DONE__Message()
