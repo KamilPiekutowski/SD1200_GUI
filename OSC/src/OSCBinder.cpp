@@ -49,4 +49,3 @@ void OSCBinder::requestListOfFX()
 
     qDebug() << "Retrieved FX list from OSC";
 }
-

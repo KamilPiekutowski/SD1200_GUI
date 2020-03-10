@@ -7,6 +7,7 @@ import "QML"
 
 Item {
     property string fontFamily: "Roboto"
+
     id: root
     width: 800
     height: 460
@@ -14,6 +15,7 @@ Item {
     Loading  {
         id: loading
         color: "#647a35"
+        textColor: "#F6F5FC"
         z: 100
     }
 
@@ -37,7 +39,7 @@ Item {
         id : rootBackground;
         width: parent.width;
         height: parent.height;
-            color: "#0C1923"
+        color: "#0C1923"
     }
 
     MenuButton {

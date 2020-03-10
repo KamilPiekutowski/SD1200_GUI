@@ -24,18 +24,18 @@ Rectangle {
         }
 
         onMouseXChanged: {
-            OSCBinder.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
+            myPerson.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
                                      Math.trunc(sliderBtn.y), 'T');
         }
 
         onMouseYChanged: {
 
-            OSCBinder.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
+            myPerson.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
                                      Math.trunc(sliderBtn.y), 'T');
         }
 
         onReleased: {
-            OSCBinder.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
+            myPerson.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
                                      Math.trunc(sliderBtn.y), 'F');
         }
 
