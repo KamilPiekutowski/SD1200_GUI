@@ -4,6 +4,9 @@
 OSCBinder::OSCBinder(QObject *parent) : QObject(parent) , oscs("7770")
 {
    oscs.startServer();
+   oscs.set__DONE__(0); // this allows to receive message unti sclang is done sending
+   requestListOfFX();
+   timerId = startTimer(500);
 }
 
 QVector<QString> OSCBinder::getListOfFX()
@@ -11,7 +14,6 @@ QVector<QString> OSCBinder::getListOfFX()
     oscs.set__DONE__(0); // this allows to receive message unti sclang is done sending
     requestListOfFX();
     QVector<QString> items = oscs.getListOfFX();
-
     return  items;
 }
 
@@ -31,6 +33,11 @@ void OSCBinder::sendQMLGuiCtrl(QString x, QString y, QChar activate)
 
 }
 
+void OSCBinder::run()
+{
+    getListOfFX();
+}
+
 void OSCBinder::requestListOfFX()
 {
     /**********         sending message to sclang            **********/
@@ -40,16 +47,6 @@ void OSCBinder::requestListOfFX()
     oscclient.addMessage("");
     oscclient.sendMessage();
 
-    /**********  setup server and listen for __DONE__ message **********/
-    waitFor__DONE__Message();
-
     qDebug() << "Retrieved FX list from OSC";
-}
-
-void OSCBinder::waitFor__DONE__Message()
-{
-    while (!oscs.get__DONE__()) {
-        usleep(100);
-    }
 }
 

@@ -31,6 +31,7 @@
 #include <QQuickView>
 #include <QSettings>
 #include <QQmlContext>
+//#include <QtDeclarative>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,20 +45,24 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    OSCBinder oscbinder;
+    //OSCBinder oscbinder;
+    //oscbinder.start();
 
     const QString mainQmlApp = QLatin1String("qrc:/main.qml");
     QQuickView view;
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QQmlContext* context = view.engine()->rootContext();
-    context->setContextProperty("OSCBinder", QVariant::fromValue(&oscbinder));
+    //context->setContextProperty("OSCBinder", QVariant::fromValue(&oscbinder));
+    qmlRegisterType<OSCBinder>("People", 1, 0, "OSCBinder");
 
     view.setSource(QUrl(mainQmlApp));
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     QObject::connect(view.engine(), SIGNAL(quit()), qApp, SLOT(quit()));
 
     view.show();
+    
+    QObject *object = view.rootObject();
 
     return app.exec();
 }

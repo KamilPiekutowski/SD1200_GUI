@@ -5,5 +5,6 @@
         <file>QML/EffectsBrowser.qml</file>
         <file>QML/MenuButton.qml</file>
         <file>QML/Slider2D.qml</file>
+        <file>QML/Loading.qml</file>
     </qresource>
 </RCC>

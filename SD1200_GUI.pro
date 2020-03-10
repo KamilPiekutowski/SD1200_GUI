@@ -32,14 +32,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /home/pi/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../usr/local/lib/release/ -llo
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../usr/local/lib/debug/ -llo
-#else:unix: LIBS += -L$$PWD/../../../usr/local/lib/ -llo
-
-#INCLUDEPATH += $$PWD/../../../usr/local/include
 INCLUDEPATH += $$PWD/OSC/inc
-
-#DEPENDPATH += $$PWD/../../../usr/local/include
 
 HEADERS += \
     OSC/inc/OSCBinder.h \
@@ -47,13 +40,6 @@ HEADERS += \
     OSC/inc/OSCServer.h \
     OSCClient.h \
     OSCServer.h
-
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/local/lib/release/ -llo
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/local/lib/debug/ -llo
-#else:unix: LIBS += -L$$PWD/../../../../usr/local/lib/ -llo
-
-#INCLUDEPATH += $$PWD/../../../../usr/local/include
-#DEPENDPATH += $$PWD/../../../../usr/local/include
 
 DISTFILES +=
 

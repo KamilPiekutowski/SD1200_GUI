@@ -6,27 +6,45 @@
 #include <QDebug>
 #include <QQuickItem>
 #include <QVector>
+#include <QThread>
 
 #include "OSCClient.h"
 #include "OSCServer.h"
 
 class OSCBinder : public QObject
 {
+
     Q_OBJECT
 public: //methods
     explicit OSCBinder(QObject *parent = nullptr);
 
     Q_INVOKABLE QVector<QString> getListOfFX();
     Q_INVOKABLE void sendQMLGuiCtrl(QString x, QString y, QChar activate);
-private: //methods
-    void requestListOfFX();
-    void waitFor__DONE__Message(); //End Of List Message "__EOL__"
 
-public: //members
+    void timerEvent(QTimerEvent *e) {
+      if(oscs.get__DONE__())
+      {
+        killTimer(timerId);
+        fxList = oscs.getListOfFX();
+        emit fxListReceived(fxList);
+      }
+      else
+      {
+         //make another request
+         requestListOfFX();
+      }
+      qDebug() << "Timer Event";
+     }
+private: //methods
+    void run();
+    void requestListOfFX();
+private: //members
     OSCServer oscs;
+    QVector<QString> fxList;
+    int timerId;
 public: //methods
 signals:
-
+void fxListReceived(QVector<QString>  fxList);
 public slots:
 
 };

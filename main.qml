@@ -2,17 +2,43 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.0
+import People 1.0
 import "QML"
 
 Item {
     property string fontFamily: "Roboto"
     id: root
-    visible: true
     width: 800
     height: 460
-    //title: qsTr("SD 1200")
-    //color: "#0C1923"
-    //visibility: Window.FullScreen
+
+    Loading  {
+        id: loading
+        color: "#647a35"
+        z: 100
+    }
+
+    OSCBinder {
+        id: myPerson
+        onFxListReceived: {
+             console.log("request list");
+             if(fxList.length) {
+                 browserButton.customText = fxList[0];
+
+                 for(var i = 0; i < fxList.length; i++) {
+                     effectsBrowser.model.append( { name: fxList[i]})
+                 }
+
+                 loading.visible = false;
+             }
+         }
+    }
+
+    Rectangle {
+        id : rootBackground;
+        width: parent.width;
+        height: parent.height;
+            color: "#0C1923"
+    }
 
     MenuButton {
         id: browserButton
@@ -58,19 +84,5 @@ Item {
     EffectsBrowser {
         id: effectsBrowser
         textColor: browserButton.textColor
-    }
-
-    //this must be called when all gui element are created
-    Component.onCompleted:  {
-
-        var elements = OSCBinder.getListOfFX()
-
-        if(elements.length) {
-            browserButton.customText = elements[0]
-        }
-
-        for(var i = 0; i < elements.length; i++) {
-            effectsBrowser.model.append( { name: elements[i]})
-        }
     }
 }

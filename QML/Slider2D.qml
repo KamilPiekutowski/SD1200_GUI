@@ -19,8 +19,8 @@ Rectangle {
         drag.maximumY: height - sliderBtn.height - sliderBtn.border.width
 
         onPressed: {
-            OSCBinder.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
-                                     Math.trunc(sliderBtn.y), 'T');
+            sliderBtn.x = Math.min(Math.max(parseInt(mouseX), 1), box2.width - sliderBtn.width - sliderBtn.border.width);
+            sliderBtn.y = Math.min(Math.max(parseInt(mouseY), 1), box2.height - sliderBtn.height - sliderBtn.border.width);;
         }
 
         onMouseXChanged: {
@@ -52,6 +52,5 @@ Rectangle {
         border.width: 4;
         border.color: box2.border.color
     }
-
 }
 
