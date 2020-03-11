@@ -22,9 +22,9 @@ void OSCBinder::sendQMLGuiCtrl(QString x, QString y, QChar activate)
     char a =  (char) activate.toLatin1();
     OSCClient oscclient("127.0.0.1", "57120", "/qml_gui_ctrl");
 
-    oscclient.addMessageType('i');
+    oscclient.addMessageType('f');
     oscclient.addMessage(x.toStdString());
-    oscclient.addMessageType('i');
+    oscclient.addMessageType('f');
     oscclient.addMessage(y.toStdString());
     oscclient.addMessageType(a);
     oscclient.addMessage("");

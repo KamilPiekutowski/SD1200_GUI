@@ -11,6 +11,7 @@ Rectangle {
     radius: 10
 
     MouseArea {
+        id: mouseArea
         anchors.fill: box2
         drag.target: sliderBtn
         drag.minimumX: 0
@@ -24,19 +25,18 @@ Rectangle {
         }
 
         onMouseXChanged: {
-            myPerson.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
-                                     Math.trunc(sliderBtn.y), 'T');
+            myPerson.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
+                                    sliderBtn.y/ mouseArea.drag.maximumY, 'T');
         }
 
         onMouseYChanged: {
-
-            myPerson.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
-                                     Math.trunc(sliderBtn.y), 'T');
+            myPerson.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
+                                    sliderBtn.y/ mouseArea.drag.maximumY, 'T');
         }
 
         onReleased: {
-            myPerson.sendQMLGuiCtrl(Math.trunc(sliderBtn.x),
-                                     Math.trunc(sliderBtn.y), 'F');
+            myPerson.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
+                                    sliderBtn.y/ mouseArea.drag.maximumY, 'F');
         }
 
     }
