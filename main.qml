@@ -24,10 +24,12 @@ Item {
         onFxListReceived: {
              console.log("request list");
              if(fxList.length) {
-                 browserButton.customText = fxList[0];
+                 browserButton.customText = fxList[0].split("_")[0];
+                 // set the synthdef to the first on effect in the list
+                 sendQMLGuiSetSynthDef(fxList[0]);
 
                  for(var i = 0; i < fxList.length; i++) {
-                     effectsBrowser.model.append( { name: fxList[i]})
+                     effectsBrowser.model.append( { name: fxList[i].split("_")[0]})
                  }
 
                  loading.visible = false;

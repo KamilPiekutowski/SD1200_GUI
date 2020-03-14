@@ -33,6 +33,16 @@ void OSCBinder::sendQMLGuiCtrl(QString x, QString y, QChar activate)
 
 }
 
+void OSCBinder::sendQMLGuiSetSynthDef(QString synthdefName)
+{
+    OSCClient oscclient("127.0.0.1", "57120", "/qml_set_synthdef");
+
+    oscclient.addMessageType('s');
+    oscclient.addMessage(synthdefName.toStdString());
+
+    oscclient.sendMessage();
+}
+
 void OSCBinder::run()
 {
     getListOfFX();

@@ -20,6 +20,7 @@ public: //methods
 
     Q_INVOKABLE QVector<QString> getListOfFX();
     Q_INVOKABLE void sendQMLGuiCtrl(QString x, QString y, QChar activate);
+    Q_INVOKABLE void sendQMLGuiSetSynthDef(QString synthdefName);
 
     void timerEvent(QTimerEvent *e) {
       if(oscs.get__DONE__())

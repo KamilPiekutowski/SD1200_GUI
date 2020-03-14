@@ -26,7 +26,7 @@ int OSCServer::startServer()
 
     /* add method that will match the path /foo/bar, with two numbers, coerced
      * to float and int */
-    //lo_server_thread_add_method(st, "/foo/bar", "fi", foo_handler, NULL);
+    //lo_server_thread_add_method(serverThread, "/foo/bar", "fi", set_synthdef, NULL);
 
     /* add method that will match the path /blobtest with one blob arg */
     lo_server_thread_add_method(serverThread, "/fx_list", "s", receive_FX_list_handler, NULL);
@@ -92,3 +92,4 @@ int OSCServer::receive_FX_list_handler(const char *path, const char *types, lo_a
         listOfFX.push_back((char*) argv[0]);
     }
 }
+

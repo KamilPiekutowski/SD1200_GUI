@@ -28,7 +28,7 @@ private: //methods
     static int done_handler(const char *path, const char *types, lo_arg ** argv,
                      int argc, void *data, void *user_data);
     static int receive_FX_list_handler(const char *path, const char *types, lo_arg ** argv,
-                        int argc, void *data, void *user_data);
+                     int argc, void *data, void *user_data);
     std::string port;
     lo_server_thread serverThread;
 public: //members
