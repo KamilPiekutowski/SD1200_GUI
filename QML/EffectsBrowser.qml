@@ -35,16 +35,52 @@ Rectangle {
             anchors.fill: parent
             model: parent.model
             clip: true
+            highlight: highlightBar
+            highlightFollowsCurrentItem: false
+
+            onCurrentIndexChanged: {
+                        console.log(model.get("currentIndex"))
+                  }
 
             delegate: Text {
                 property string textColor: browserListView.textColor
+                property int idx: index
+                property string controllerType: ctlType
 
+                id: componentText
                 text: name
                 color: textColor
                 font.pixelSize: browserButton.children[1].font.pixelSize
                 font.family: browserButton.children[1].font.family
                 clip:true
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        console.log("index " + idx);
+                        console.log("ctlType " + ctlType);
+                        effectsBrowser.visible = !effectsBrowser.visible;
+
+                        //set the text of browser button
+                        browserButton.customText = name;
+                        browserListView.currentIndex = idx;
+                        oscBinder.sendQMLGuiSetSynthDef(name + "_" + ctlType);
+                    }
+                }
             }
+
+            Component {
+                id: highlightBar
+                Rectangle {
+                    width: listViewBox.width
+                    height: browserButton.children[1].font.pixelSize + 6
+                    color: "#FFFF88"
+                    opacity: 0.2
+                    y: browserListView.currentItem.y;
+                    //Behavior on y { SpringAnimation { spring: 2; damping: 0.1 } }
+                }
+            }
+
 
             boundsBehavior: Flickable.StopAtBounds
             focus: true

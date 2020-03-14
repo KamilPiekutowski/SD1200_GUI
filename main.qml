@@ -20,7 +20,7 @@ Item {
     }
 
     OSCBinder {
-        id: myPerson
+        id: oscBinder
         onFxListReceived: {
              console.log("request list");
              if(fxList.length) {
@@ -29,7 +29,9 @@ Item {
                  sendQMLGuiSetSynthDef(fxList[0]);
 
                  for(var i = 0; i < fxList.length; i++) {
-                     effectsBrowser.model.append( { name: fxList[i].split("_")[0]})
+                     effectsBrowser.model.append( { 'name': fxList[i].split("_")[0]});
+                     effectsBrowser.model.setProperty(i, 'index', i);
+                     effectsBrowser.model.setProperty(i, 'ctlType', fxList[0].split("_")[1]);
                  }
 
                  loading.visible = false;
