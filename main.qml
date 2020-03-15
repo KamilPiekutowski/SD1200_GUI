@@ -73,7 +73,7 @@ Item {
             width: parent.height// * 0.75
             height: parent.height// * 0.75
             anchors.fill: parent
-            anchors.margins: 5
+            anchors.margins: 4
             rotation: 180
         }
 
@@ -101,7 +101,7 @@ Item {
             width: parent.height// * 0.75
             height: parent.height// * 0.75
             anchors.fill: parent
-            anchors.margins: 8
+            anchors.margins: 4
             rotation: 0
         }
 
