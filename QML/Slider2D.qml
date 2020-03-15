@@ -25,17 +25,17 @@ Rectangle {
         }
 
         onMouseXChanged: {
-            myPerson.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
+            oscBinder.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
                                     sliderBtn.y/ mouseArea.drag.maximumY, 'T');
         }
 
         onMouseYChanged: {
-            myPerson.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
+            oscBinder.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
                                     sliderBtn.y/ mouseArea.drag.maximumY, 'T');
         }
 
         onReleased: {
-            myPerson.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
+            oscBinder.sendQMLGuiCtrl(sliderBtn.x/ mouseArea.drag.maximumX,
                                     sliderBtn.y/ mouseArea.drag.maximumY, 'F');
         }
 

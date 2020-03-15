@@ -16,6 +16,7 @@ Rectangle {
 
     Rectangle
     {
+        id: listViewBackground
         property string textColor: parent.textColor
         property ListModel model: parent.model
 
@@ -39,8 +40,14 @@ Rectangle {
             highlightFollowsCurrentItem: false
 
             onCurrentIndexChanged: {
-                        console.log(model.get("currentIndex"))
-                  }
+                var itemName = listViewBox.model.get(currentIndex).name;
+                var itemCtlType = listViewBox.model.get(currentIndex).ctlType;
+                console.log("itemCtlType: " + itemCtlType);
+                browserButton.customText = itemName;
+
+                //send osc message
+                oscBinder.sendQMLGuiSetSynthDef(itemName + "_" + itemCtlType);
+            }
 
             delegate: Text {
                 property string textColor: browserListView.textColor
@@ -77,7 +84,6 @@ Rectangle {
                     color: "#FFFF88"
                     opacity: 0.2
                     y: browserListView.currentItem.y;
-                    //Behavior on y { SpringAnimation { spring: 2; damping: 0.1 } }
                 }
             }
 

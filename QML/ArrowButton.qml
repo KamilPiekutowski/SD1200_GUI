@@ -23,15 +23,5 @@ RoundButton {
         }
     }
 
-    Text {
-        id: bText1
-        text: qsTr("arrowButton")
-        color: "#F6F5FC"
-        anchors.centerIn: parent
-        font.family: parent.font.family
-        layer.enabled: true
-        layer.samples: 16
-    }
-
     radius: 0
 }

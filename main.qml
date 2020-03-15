@@ -25,6 +25,7 @@ Item {
              console.log("request list");
              if(fxList.length) {
                  browserButton.customText = fxList[0].split("_")[0];
+
                  // set the synthdef to the first on effect in the list
                  sendQMLGuiSetSynthDef(fxList[0]);
 
@@ -64,6 +65,29 @@ Item {
         height: parent.height * 0.25
         anchors.right: browserButton.left
         font.family: root.fontFamily
+
+
+
+        Image {
+            source: "qrc:/img/ForwardButtonSmall.png"
+            width: parent.height// * 0.75
+            height: parent.height// * 0.75
+            anchors.fill: parent
+            anchors.margins: 5
+            rotation: 180
+        }
+
+        onClicked: {
+            console.log(effectsBrowser.children[0].children[0].count);
+            var nextIndex = effectsBrowser.children[0].children[0].currentIndex - 1;
+            if(nextIndex < 0)
+            {
+                nextIndex = 0;
+            }
+
+            console.log("index: " + nextIndex);
+            effectsBrowser.children[0].children[0].currentIndex = nextIndex;
+        }
     }
 
     ArrowButton {
@@ -72,6 +96,26 @@ Item {
         height: parent.height * 0.25
         anchors.left: browserButton.right
         font.family: root.fontFamily
+        Image {
+            source: "qrc:/img/ForwardButtonSmall.png"
+            width: parent.height// * 0.75
+            height: parent.height// * 0.75
+            anchors.fill: parent
+            anchors.margins: 8
+            rotation: 0
+        }
+
+        onClicked: {
+            console.log(effectsBrowser.children[0].children[0].count);
+            var nextIndex = effectsBrowser.children[0].children[0].currentIndex + 1;
+            if(nextIndex > effectsBrowser.children[0].children[0].count - 1)
+            {
+                nextIndex = effectsBrowser.children[0].children[0].count - 1;
+            }
+
+            console.log("index: " + nextIndex);
+            effectsBrowser.children[0].children[0].currentIndex = nextIndex;
+        }
     }
 
     MenuButton {
